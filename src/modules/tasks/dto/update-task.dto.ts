@@ -1,19 +1,19 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsString } from 'class-validator';
 
 export class UpdateTaskDto {
-  @IsOptional() // 필수 값이 아닌 선택적 요소
   @IsString()
-  title?: string;
+  @IsNotEmpty()
+  title: string;
 
-  @IsOptional()
   @IsString()
-  content?: string;
+  @IsNotEmpty()
+  content: string;
 
-  @IsOptional()
   @IsString()
-  category?: string;
+  @IsNotEmpty()
+  category: string;
 
-  @IsOptional()
   @IsString()
-  thumbnail?: string;
+  @IsNotEmpty()
+  thumbnail: string;
 }

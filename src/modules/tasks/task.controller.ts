@@ -9,8 +9,9 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { CreateTaskDto, UpdateTaskDto } from './dto';
+import { CreateTaskDto, ModifyTaskDto, UpdateTaskDto } from './dto';
 import { TaskService } from './task.service';
+import { TaskEntity } from './entities/task.entity';
 
 @Controller('tasks')
 export class TaskController {
@@ -18,14 +19,14 @@ export class TaskController {
 
   // 조회 - 전체
   @Get()
-  findAll() {
-    this.taskService.getTasks();
+  async findAll(): Promise<TaskEntity[]> {
+    return await this.taskService.getTasks();
   }
 
   // 조회 - (개별)
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number) {
-    this.taskService.getTask(id);
+  async findOne(@Param('id', ParseIntPipe) id: number): Promise<TaskEntity> {
+    return await this.taskService.getTask(id);
   }
 
   // 생성
@@ -42,7 +43,7 @@ export class TaskController {
 
   // 수정
   @Patch(':id')
-  modify(@Param('id', ParseIntPipe) id: number, @Body() body: UpdateTaskDto) {
+  modify(@Param('id', ParseIntPipe) id: number, @Body() body: ModifyTaskDto) {
     this.taskService.modifyTask(id, body);
   }
 
