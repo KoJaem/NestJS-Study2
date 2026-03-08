@@ -34,7 +34,7 @@ export class TaskController {
     return await this.taskService.createTask(body);
   }
 
-  // 업데이트
+  // 수정
   @Patch(':id')
   async update(
     @Param('id', ParseIntPipe) id: number,

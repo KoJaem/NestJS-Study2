@@ -50,7 +50,7 @@ export class TaskService {
     };
   }
 
-  // 업데이트
+  // 수정
   // 특정 ID의 데이터를 찾아 페이로드(UpdateTaskDto)의 내용으로 변경합니다.
   // SQL: UPDATE tasks SET title = ?, content = ?, category = ?, thumbnail = ? WHERE id = ?;
   async updateTask(id: number, payload: UpdateTaskDto) {
@@ -67,8 +67,14 @@ export class TaskService {
 
     // DB 저장
     // save() 메서드는 엔티티에 primary key(id)가 포함되어 있으면
-    // 새로운 행을 생성하지 않고, 기존 행을 업데이트(UPDATE) 합니다.
+    // 새로운 행을 생성하지 않고, 기존 행을 업데이트 합니다.
     await this.taskRepository.save(task);
+
+    return {
+      message: '테스크 수정을 완료했습니다.',
+      id: task.id,
+      statusCode: HttpStatus.OK, // 200
+    };
   }
 
   // 삭제
