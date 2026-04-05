@@ -21,7 +21,7 @@ async function bootstrap() {
 
   const config = new DocumentBuilder()
     .setTitle('Nest.js API 문서 제목')
-    .setDescription('[api-json](/api-json)')
+    .setDescription('JSON 구조 [링크](/api-docs-json)')
     .setVersion('1.0')
     // .addTag('cats')
     .build();
