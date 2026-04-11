@@ -1,2 +1,4 @@
-export { CreateTaskDto } from './create-task.dto';
-export { UpdateTaskDto } from './update-task.dto';
+export * from './delete';
+export * from './get';
+export * from './patch';
+export * from './post';

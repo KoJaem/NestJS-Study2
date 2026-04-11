@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsString } from 'class-validator';
 
-export class CreateTaskDto {
+export class CreateTaskRequestDto {
   @ApiProperty({ description: '할 일 제목', example: '장보기' })
   @IsString()
   @IsNotEmpty()
