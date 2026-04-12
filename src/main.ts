@@ -8,6 +8,12 @@ import { API_GLOBAL_PREFIX } from './common/constants/api-global-prefix.constant
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.enableCors({
+    origin: process.env.CORS_ORIGIN?.split(',') ?? [],
+    methods: process.env.CORS_METHODS?.split(',') ?? [],
+    credentials: true,
+  });
+
   app.setGlobalPrefix(API_GLOBAL_PREFIX);
 
   // 전역 유효성 검사 파이프 적용
