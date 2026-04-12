@@ -35,8 +35,10 @@ lerna-debug.log*
 !.vscode/launch.json
 !.vscode/extensions.json
 
-# dotenv environment variable files
-.env**
+# dotenv — .env 폴더 안 파일은 무시하되, 예시 템플릿만 추적
+# (.env** 처럼 부모까지 통째로 무시하면 !로 예외를 줄 수 없음)
+.env/*
+!.env/.env.example
 
 # temp directory
 .temp
