@@ -1,4 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
+import {
+  CATEGORIES,
+  type Category,
+} from '@/modules/tasks/constants/categories.type';
 
 /**
  * GET 할 일 조회 API 응답(단건·목록 항목 공통 형태)
@@ -13,8 +17,12 @@ export class GetTaskResponseDto {
   @ApiProperty({ description: '내용', example: '우유, 계란 구매' })
   content: string;
 
-  @ApiProperty({ description: '카테고리', example: '생활' })
-  category: string;
+  @ApiProperty({
+    description: '카테고리',
+    example: '생활',
+    enum: CATEGORIES,
+  })
+  category: Category;
 
   @ApiProperty({
     description: '썸네일 URL 또는 경로',

@@ -1,6 +1,7 @@
 import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { Category } from './constants/categories.type';
 import {
   CreateTaskRequestDto,
   CreateTaskResponseDto,
@@ -25,9 +26,8 @@ export class TaskService {
   async getTasks(
     query: GetTasksRequestDto = {},
   ): Promise<GetTaskResponseDto[]> {
-    const category: string | undefined = query.category?.trim();
-    const hasCategoryFilter: boolean =
-      category !== undefined && category.length > 0;
+    const category: Category | undefined = query.category;
+    const hasCategoryFilter: boolean = category !== undefined;
     const rows: TaskEntity[] = hasCategoryFilter
       ? await this.taskRepository.find({ where: { category } })
       : await this.taskRepository.find();

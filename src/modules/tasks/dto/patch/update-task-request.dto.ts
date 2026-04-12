@@ -1,5 +1,10 @@
 import { ApiPropertyOptional } from '@nestjs/swagger';
-import { IsOptional, IsString } from 'class-validator';
+import { IsIn, IsOptional, IsString } from 'class-validator';
+import {
+  CATEGORIES,
+  CATEGORY_ALLOWED_VALUES_MESSAGE,
+  type Category,
+} from '@/modules/tasks/constants/categories.type';
 
 /**
  * PATCH /tasks/:id — 수정 요청 본문(부분 갱신)
@@ -17,8 +22,8 @@ export class UpdateTaskRequestDto {
 
   @ApiPropertyOptional({ description: '카테고리', example: '생활' })
   @IsOptional()
-  @IsString()
-  category?: string;
+  @IsIn(CATEGORIES, { message: CATEGORY_ALLOWED_VALUES_MESSAGE })
+  category?: Category;
 
   @ApiPropertyOptional({
     description: '썸네일 URL 또는 경로',

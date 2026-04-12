@@ -30,6 +30,7 @@ import {
   UpdateTaskRequestDto,
   UpdateTaskResponseDto,
 } from './dto';
+import { CATEGORIES } from './constants/categories.type';
 import { TaskService } from './task.service';
 
 @ApiTags('tasks')
@@ -48,6 +49,7 @@ export class TaskController {
     required: false,
     description: '카테고리로 필터링',
     example: '생활',
+    enum: CATEGORIES,
   })
   @ApiOkResponse({
     description: '조회 성공 — 할 일 객체 배열',

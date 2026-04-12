@@ -6,6 +6,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import type { Category } from '@/modules/tasks/constants/categories.type';
 
 @Entity('tasks')
 export class TaskEntity {
@@ -23,7 +24,7 @@ export class TaskEntity {
 
   @ApiProperty({ description: '카테고리', example: '생활' })
   @Column()
-  category: string;
+  category: Category;
 
   @ApiProperty({
     description: '썸네일 URL 또는 경로',
