@@ -1,9 +1,8 @@
+import { ProductModule } from '@/modules/product/product.module';
+import { TaskModule } from '@/modules/tasks/task.module';
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { TaskModule } from '@/modules/tasks/task.module';
-import { UserModule } from '@/modules/users/user.module';
-import { ProductModule } from '@/modules/product/product.module';
 import { LoggerModule } from 'nestjs-pino';
 
 @Module({
@@ -42,8 +41,6 @@ import { LoggerModule } from 'nestjs-pino';
     ProductModule,
 
     TaskModule,
-
-    UserModule,
   ],
 })
 export class AppModule {}
