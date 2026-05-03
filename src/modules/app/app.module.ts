@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TaskModule } from '@/modules/tasks/task.module';
 import { UserModule } from '@/modules/users/user.module';
+import { LoggerModule } from 'nestjs-pino';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { UserModule } from '@/modules/users/user.module';
         // synchronize: process.env.NODE_ENV === 'development',
       }),
     }),
+    LoggerModule.forRoot(),
 
     TaskModule,
 

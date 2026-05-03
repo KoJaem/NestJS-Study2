@@ -4,9 +4,12 @@ import { ValidationPipe } from '@nestjs/common';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { HttpExceptionFilter } from './common/http-exception.filter';
 import { API_GLOBAL_PREFIX } from './common/constants/api-global-prefix.constant';
+import { Logger } from 'nestjs-pino';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.useLogger(app.get(Logger));
 
   app.enableCors({
     origin: process.env.CORS_ORIGIN?.split(',') ?? [],
