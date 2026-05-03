@@ -1,53 +1,36 @@
-import { ApiProperty } from '@nestjs/swagger';
+import type { Category } from '@/modules/tasks/constants/categories.type';
 import {
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
+  VersionColumn,
 } from 'typeorm';
-import type { Category } from '@/modules/tasks/constants/categories.type';
 
 @Entity('tasks')
 export class TaskEntity {
-  @ApiProperty({ description: '할 일 ID', example: 1 })
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty({ description: '제목', example: '장보기' })
   @Column()
   title: string;
 
-  @ApiProperty({ description: '내용', example: '우유, 계란 구매' })
   @Column()
   content: string;
 
-  @ApiProperty({ description: '카테고리', example: '생활' })
   @Column()
   category: Category;
 
-  @ApiProperty({
-    description: '썸네일 URL 또는 경로',
-    example: 'https://example.com/thumbnail.jpg',
-  })
   @Column()
   thumbnail: string;
 
-  @ApiProperty({
-    description: '생성 일시',
-    type: String,
-    format: 'date-time',
-    example: '2026-04-11T12:00:00.000Z',
-  })
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @ApiProperty({
-    description: '수정 일시',
-    type: String,
-    format: 'date-time',
-    example: '2026-04-11T12:00:00.000Z',
-  })
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+  @VersionColumn() // 업데이트 시 버전 자동 증가
+  version: number;
 }
