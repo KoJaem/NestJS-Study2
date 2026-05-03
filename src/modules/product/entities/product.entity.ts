@@ -21,10 +21,10 @@ export class Product {
   @Column()
   price: number;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
 
   @VersionColumn() // 업데이트 시 버전 자동 증가
