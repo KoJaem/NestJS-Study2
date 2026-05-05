@@ -4,13 +4,39 @@ import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as bcrypt from 'bcrypt';
 import { UserWithoutPassword } from './types/user-without-password.type';
+import { JwtService } from '@nestjs/jwt';
+import { LoginResponse, LoginUser } from './types/login-user.type';
 
 @Injectable()
 export class AuthService {
   constructor(
     @InjectRepository(User)
     private readonly userRepository: Repository<User>,
+    private readonly jwtService: JwtService,
   ) {}
+
+  async validateUser(
+    username: string,
+    password: string,
+  ): Promise<UserWithoutPassword | null> {
+    const user = await this.userRepository.findOneBy({ username });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      return this.mapUserToPublicWithoutPassword(user);
+    }
+
+    return null;
+  }
+
+  login(user: LoginUser): LoginResponse {
+    const payload = { username: user.username, sub: user.id };
+
+    return {
+      access_token: this.jwtService.sign(payload, {
+        secret: process.env.JWT_SECRET, // payload는 secret 없이 디코딩 가능하지만, 토큰 위/변조 검증을 위해 secret이 필요하다.
+      }),
+    };
+  }
 
   async register(
     username: string,
