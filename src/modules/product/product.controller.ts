@@ -6,16 +6,20 @@ import {
   Patch,
   Param,
   Delete,
+  UseGuards,
 } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
+import { JwtGuard } from '@/modules/auth/guard/jwt.guard';
 
 @Controller('product')
+// @UseGuards(JwtGuard) // 컨트롤러 전체에 적용
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @Post()
+  @UseGuards(JwtGuard)
   create(@Body() createProductDto: CreateProductDto) {
     return this.productService.create(createProductDto);
   }
